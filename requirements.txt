@@ -3,3 +3,4 @@ rich
 python-dotenv>=1.0.0
 streamlit-oauth
 sqlalchemy
+psycopg

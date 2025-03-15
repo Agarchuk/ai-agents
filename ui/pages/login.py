@@ -3,13 +3,17 @@ import streamlit as st
 from utils.logger import log_warning, log_success
 from backend.clients.auth0_client import Auth0Client
 from backend.services.auth0_service import Auth0Service
+from backend.services.user_service import UserService
+from backend.mappers.user_mapper import UserMapper
 from ui.utils.session_state_service import SessionStateService
 from ui.utils.session_config import SessionConfig
     
 class LoginPage:
     def __init__(self):
-        self.auth_service = Auth0Service(Auth0Client())
-        self.session_service = SessionStateService()
+        self.auth0_client = SessionStateService.get_or_create_auth0_client()
+        self.user_service = SessionStateService.get_or_create_user_service()
+        self.user_mapper = SessionStateService.get_or_create_user_mapper()
+        self.auth_service = Auth0Service(self.auth0_client, self.user_service, self.user_mapper)
 
     def display(self):
         st.title("Login")

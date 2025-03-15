@@ -1,7 +1,4 @@
-import os
-from dotenv import load_dotenv
 import streamlit as st
-load_dotenv()
 
 AUTH0_CLIENT_ID = st.secrets["auth0"]["AUTH0_CLIENT_ID"]
 AUTH0_CLIENT_SECRET = st.secrets["auth0"]["AUTH0_CLIENT_SECRET"]
