@@ -16,7 +16,7 @@ class OllamaClient:
 
     def send_request(self, system_prompt: str, user_prompt: str) -> Tuple[Dict[str, Any], float]:
         payload = {
-            "model": "gemma3:1b",
+            "model": "qwen2.5:0.5b",
             "system": system_prompt,
             "prompt": user_prompt,
             "format": "json",
