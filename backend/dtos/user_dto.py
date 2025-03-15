@@ -3,6 +3,7 @@ from dataclasses import dataclass, asdict
 @dataclass
 class UserDTO:
     """User DTO."""
+    id: int
     sub: str
     name: str
     email: str
