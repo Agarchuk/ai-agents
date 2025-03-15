@@ -2,7 +2,7 @@ from typing import Any, Dict, Tuple
 import json
 
 import requests
-from config.ollama_config import OLLAMA_API_URL
+from backend.config.ollama_config import OLLAMA_API_URL
 from utils.logger import log_info
 from typing import List
 
