@@ -19,16 +19,12 @@ class OllamaClient:
             "model": "smollm2:135m",
             "system": system_prompt,
             "prompt": user_prompt,
-            "format": "json",
             "stream": False
         }
         try:
             response = requests.post(f"{OLLAMA_API_URL}/api/generate", json=payload)
             response.raise_for_status()
             
-            result = response.json()
-            
-            response = json.loads(result.get("response", "{}"))
             log_info(f"Response: {response}")
             return response
             
