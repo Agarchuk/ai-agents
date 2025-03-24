@@ -4,9 +4,9 @@ from backend.mappers.user_mapper import UserMapper
 from backend.models.user import User
 
 class UserService:
-    def __init__(self):
-        self.user_mapper = UserMapper()
-        self.user_repository = UserRepository()
+    def __init__(self, user_repository: UserRepository, user_mapper: UserMapper):
+        self.user_mapper = user_mapper
+        self.user_repository = user_repository
 
     def get_or_save_user_to_db(self, user: User) -> User:
         if not user or not hasattr(user, 'sub') or not user.sub:

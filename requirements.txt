@@ -5,3 +5,11 @@ streamlit-oauth
 sqlalchemy
 psycopg
 psycopg2-binary
+langchain-community
+langchain-openai
+langchain
+langgraph
+pydantic
+ollama
+langchain-ollama
+IPython

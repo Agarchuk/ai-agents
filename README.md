@@ -1,5 +1,15 @@
 # ai-agents
 
+## Overview
+
+This project is a collection of AI agents that use natural language to interact with users.
+
+## Features
+
+1. Login with Auth0
+2. Ollama server deployed on RunPod for LLM calls
+
+
 ## Installation
 
 1. Clone the repository:

@@ -1,52 +1,46 @@
 from typing import Any, Dict, Tuple
 import ollama
 from pydantic import BaseModel
-from langchain_openai import ChatOpenAI
-from backend.config.ollama_config import OLLAMA_MODEL, OLLAMA_API_URL
+from langchain_ollama import ChatOllama
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import PydanticOutputParser
+
+from backend.config.ollama_config import OLLAMA_MODEL
 from utils.logger import log_info
 from typing import List
 import streamlit as st
-from langchain_core.prompts import ChatPromptTemplate
-import requests
-from langchain_core.output_parsers import PydanticOutputParser
-from langchain_core.output_parsers import StrOutputParser
+from langchain.agents import create_tool_calling_agent, AgentExecutor
 
 class OllamaClient:
-    def __init__(self, model: str = None):
-        self.model = model or OLLAMA_MODEL
-        self.llm: ChatOpenAI = ChatOpenAI(
-            api_key="ollama",
-            model=self.model, 
-            base_url= f"{OLLAMA_API_URL}/v1"
-        )
-
-    def get_models(self) -> List[str]:
-        response = requests.get(f"{OLLAMA_API_URL}/api/tags")
-        response.raise_for_status()
-        log_info(f"Models: {response.json()}")
-        model_names = [model['model'] for model in response.json()['models']]
-        return model_names
+    def __init__(self):
+        self.llm: ChatOllama = ChatOllama(model=OLLAMA_MODEL)
 
     def generate_response(self,
                           system_prompt: str,
                           user_prompt: str,
-                          formatClass: type[BaseModel]) -> Tuple[Dict[str, Any], float] :
+                          formatClass: type[BaseModel],
+                          tools: List[Dict[str, Any]] = []) -> Tuple[Dict[str, Any], float]:
 
-        llm_with_structured_output = self.llm.with_structured_output(formatClass.model_json_schema())        
+        parser = PydanticOutputParser(pydantic_object=formatClass)
         
-        prompt = ChatPromptTemplate.from_messages([
-            ("system", system_prompt),
-            ("human", user_prompt)
-        ])
+        log_info(f"Tools provided to generate_response: {tools}")
+        
+        prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", system_prompt),
+                ("placeholder", "{agent_scratchpad}"),
+                ("user", user_prompt)
+            ]
+        ) 
 
-        log_info(f"Prompt: {prompt}")
+        agent = create_tool_calling_agent(self.llm, tools, prompt)
+        executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
-        log_info(f"LLM model: {self.model}")
-
-        chain = prompt | llm_with_structured_output
-
+        
         try:
-            response = chain.invoke({})
+            st.write("executor")
+            st.write(executor)
+            response = executor.invoke({})
 
             st.write("response")
             st.write(response)
@@ -73,7 +67,7 @@ class OllamaClient:
             ]
             
             response = ollama.chat(
-                model=self.model, 
+                model=OLLAMA_MODEL, 
                 messages=messages,
                 tools=tools,
                 format=formatClass.model_json_schema(), 

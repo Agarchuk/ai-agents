@@ -1,10 +1,6 @@
-import os
 import streamlit as st
 from utils.logger import log_warning, log_success
-from backend.clients.auth0_client import Auth0Client
 from backend.services.auth0_service import Auth0Service
-from backend.services.user_service import UserService
-from backend.mappers.user_mapper import UserMapper
 from ui.utils.session_state_service import SessionStateService
 from ui.utils.session_config import SessionConfig
     
@@ -23,5 +19,5 @@ class LoginPage:
         if user_dto:
             log_success(f"User {user_dto.sub} logged in")
             SessionStateService.set(SessionConfig.USER_SUB, user_dto.sub)
-            SessionStateService.set(SessionConfig.TOKEN_KEY, user_dto.token)
+            SessionStateService.set(SessionConfig.ACCESS_TOKEN, user_dto.token)
             st.rerun()
