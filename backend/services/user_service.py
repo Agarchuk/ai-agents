@@ -16,16 +16,12 @@ class UserService:
         try:
             db_user = self.get_user_by_sub(user.sub)
             if db_user is None:
-                log_info(f"User {user.sub} not found, adding to database")
                 db_user = self.user_repository.add_user(user)
                 if db_user:
-                    log_info(f"User {user.sub} saved to database")
                     return db_user
                 else:
-                    log_warning(f"Failed to save user {user.sub} to database")
                     return None
             else:
-                log_info(f"User {user.sub} already exists in database")
                 return db_user
         except Exception as e:
             log_error("Error saving user to database: %s", str(e))

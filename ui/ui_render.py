@@ -12,7 +12,6 @@ class App:
             LoginPage().display()
         else:
             pages = [
-                st.Page("ui/pages/0_home.py", title="Home", icon=":material/home:"),
                 st.Page("ui/pages/1_cleaning_agent.py", title="Cleaning Agent", icon=":material/cleaning_bucket:"),
             ]
                 

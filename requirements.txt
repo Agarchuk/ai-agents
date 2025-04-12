@@ -13,3 +13,9 @@ pydantic
 ollama
 langchain-ollama
 IPython
+plotly
+scipy
+matplotlib
+seaborn
+networkx
+pygraphviz

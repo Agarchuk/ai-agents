@@ -22,14 +22,17 @@ class SessionConfig:
     USER_MAPPER = "user_mapper"
 
     # nodes
+    DATASET_TOPIC_NODE = "dataset_topic_node"
     ANALYSIS_NODE = "analysis_node"
     MISSING_VALUES_NODE = "missing_values_node"
     HANDLE_MISSING_VALUES_NODE = "handle_missing_values_node"
     DUPLICATE_VALUES_NODE = "duplicate_values_node"
     HANDLE_DUPLICATE_VALUES_NODE = "handle_duplicate_values_node"
-    DETECT_OUTLINERS_NODE = "detect_outliners_node"
-    HANDLE_OUTLINERS_NODE = "handle_outliners_node"
-
+    DETECT_OUTLIERS_NODE = "detect_outliers_node"
+    HANDLE_OUTLIERS_NODE = "handle_outliers_node"
+    HANDLE_PLAUSIBILITY_OF_OUTLIERS_NODE = "handle_plausibility_of_outliers_node"
+    REPORT_GENERATION_NODE = "report_generation_node"
+    
     # agents
     CLEANING_AGENT = "cleaning_agent"
     
@@ -41,3 +44,6 @@ class SessionConfig:
 
     # cleaning result
     CLEANING_RESULT = "cleaning_result"
+
+    # new node
+    HUMAN_CONFIRMATION_NODE = "human_confirmation_node"
