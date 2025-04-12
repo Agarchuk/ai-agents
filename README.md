@@ -51,3 +51,26 @@ The agent uses a directed graph workflow powered by LangGraph to orchestrate the
 ![Data Cleaning AI Agent Graph](cleaning_agent_workflow.png)
 
 The graph above visualizes the workflow nodes and decision paths the agent follows when processing data.
+
+# Secrets
+
+Create a ./streamlit/secrets.toml file with the following:
+
+```toml
+[auth0]
+AUTH0_DOMAIN = "<auth0-domain>"
+AUTH0_CLIENT_ID = "<auth0-client-id>"
+AUTH0_CLIENT_SECRET = "<auth0-client-secret>"
+AUTH0_CALLBACK_URL = "<auth0-callback-url>"
+
+[postgres]
+POSTGRES_HOST = "<postgres-host>"
+POSTGRES_PORT = "<postgres-port>"
+POSTGRES_USER = "<postgres-user>"
+POSTGRES_PASSWORD = "<postgres-password>"
+POSTGRES_DB = "<postgres-db>"
+DB_URL = "postgresql+psycopg://<postgres-user>:<postgres-password>@<postgres-host>:<postgres-port>/<postgres-db>"
+
+[ollama]
+OLLAMA_API_URL =  "<ollama-api-url>"
+```
