@@ -44,6 +44,4 @@ class SessionConfig:
 
     # cleaning result
     CLEANING_RESULT = "cleaning_result"
-
-    # new node
-    HUMAN_CONFIRMATION_NODE = "human_confirmation_node"
+    

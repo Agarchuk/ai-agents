@@ -16,7 +16,6 @@ from backend.mappers.user_mapper import UserMapper
 from backend.repositories.user_repository import UserRepository
 from backend.services.user_service import UserService
 from ui.utils.session_config import SessionConfig
-from backend.nodes.human_confirmation_node import HumanConfirmationNode
 
 class SessionStateService:
     """Flexible service for managing user state in Streamlit."""
@@ -145,13 +144,6 @@ class SessionStateService:
         node_key = f"{SessionConfig.HANDLE_OUTLIERS_NODE}_{model}" if model else SessionConfig.HANDLE_OUTLIERS_NODE
         return SessionStateService.get_or_create_component(node_key, HandleOutliersNode, ollama_client)
 
-    @staticmethod
-    def get_or_create_human_confirmation_node():
-        return SessionStateService.get_or_create_component(
-            SessionConfig.HUMAN_CONFIRMATION_NODE,
-            HumanConfirmationNode
-        )
-
     # Agents
     @staticmethod
     def get_or_create_cleaning_agent(model: str = None) -> CleaningAgent:
@@ -166,7 +158,6 @@ class SessionStateService:
         handle_duplicate_values_node = SessionStateService.get_or_create_handle_duplicate_values_node()
         detect_outliers_node = SessionStateService.get_or_create_detect_outliers_node()
         handle_plausibility_of_outliers_node = SessionStateService.get_or_create_handle_plausibility_of_outliers_node()
-        human_confirmation_node = SessionStateService.get_or_create_human_confirmation_node()
         
         return SessionStateService.get_or_create_component(
             agent_key, 
@@ -178,7 +169,6 @@ class SessionStateService:
             duplicate_values_node,
             handle_duplicate_values_node,
             detect_outliers_node,
-            handle_plausibility_of_outliers_node,
-            human_confirmation_node
+            handle_plausibility_of_outliers_node
         )
     
