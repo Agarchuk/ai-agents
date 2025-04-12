@@ -10,7 +10,6 @@ class UserRepository:
         """Add user to database."""
         self.session.add(user)
         self.session.commit()
-        log_info(f"User added to database: {user.id}")
         return user
 
     def get_user_by_sub(self, sub: str):

@@ -9,4 +9,3 @@ class User(Base):
     sub = Column(String, unique=True, nullable=False)
     name = Column(String, nullable=False)
     email = Column(String, nullable=False)
-    

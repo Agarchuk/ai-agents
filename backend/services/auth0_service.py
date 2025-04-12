@@ -32,12 +32,9 @@ class Auth0Service:
             log_warning("Authorization failed: Could not map payload to user")
             return None
         
-        log_info(f"User: {user}")
-
         db_user = self.user_service.get_or_save_user_to_db(user)
         
         if db_user and hasattr(db_user, 'sub'):
-            log_info(f"User {db_user.sub} authenticated successfully")
             return self.user_mapper.map_user_model_to_dto(db_user, id_token)
         else:
             log_warning("Authorization failed: Could not get or save user to database")

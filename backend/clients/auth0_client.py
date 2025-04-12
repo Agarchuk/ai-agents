@@ -22,7 +22,7 @@ class Auth0Client:
             "name": "Login with Google",
             "icon": "https://www.google.com.tw/favicon.ico",
             "redirect_uri": AUTH0_REDIRECT_URI,
-            "scope": "openid email profile",
+            "scope": "openid email profile https://www.googleapis.com/auth/calendar.events",
             "key": "google",
             "pkce": 'S256',
         }
