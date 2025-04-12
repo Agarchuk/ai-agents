@@ -18,7 +18,7 @@ class MissingValuesNode:
         if state.report is None or state.report.missing_values is None:
             return {"error": "No analysed data provided"}
         
-        df = state.data
+        df = state.data.copy()
         report = state.report
         dataset_topic = report.dataset_topic
         missing_values = report.missing_values

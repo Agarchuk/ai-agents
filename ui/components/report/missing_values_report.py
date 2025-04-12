@@ -6,10 +6,12 @@ from ui.components.common.preview import PreviewComponent
 from ui.components.missing_values.missing_values_strategies import MissingValuesStrategiesUI
 from ui.components.common.categorical_statistics import CategoricalStatisticsComponent
 from utils.logger import log_info
+import pandas as pd
 
 class MissingValuesReportUI:
-    def __init__(self, report: Report):
+    def __init__(self, report: Report, df: pd.DataFrame):
         self.report: Report = report
+        self.df: pd.DataFrame = df
 
     def render(self):
         st.header("Missing Values")
@@ -36,8 +38,8 @@ class MissingValuesReportUI:
         with tabs[1]:
             PreviewComponent(
                 data_after_missing_values_handling, 
-                title="First 10 Rows",
-                original_df=original_data
+                original_df=self.df,
+                title="First 10 Rows"
             ).render()
 
         with tabs[2]:

@@ -1,12 +1,14 @@
 import streamlit as st
+import pandas as pd
 
 from backend.models.pydantic.core.report import Report
 from ui.components.duplicates.duplicates_strategies import DuplicatesStrategies
 from ui.components.common.preview import PreviewComponent
 
 class DuplicatesReportUI:    
-    def __init__(self, report: Report):
+    def __init__(self, report: Report, df: pd.DataFrame):
         self.report: Report = report
+        self.df: pd.DataFrame = df
 
     def render(self):
         st.header("Duplicates report")
@@ -23,7 +25,7 @@ class DuplicatesReportUI:
         ])
 
         with tabs[0]:
-            PreviewComponent(data, title="Data after duplicate values handling").render()
+            PreviewComponent(data, original_df=self.df, title="Data after duplicate values handling").render()
 
         with tabs[1]:
             DuplicatesStrategies(self.report).render()

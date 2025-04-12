@@ -5,7 +5,7 @@ import streamlit as st
 
 class AnalysisNode:
     def analyze_data(self, state: CleaningAgentState) -> CleaningAgentState:
-        data = state.data
+        data = state.data.copy()
         report = state.report
 
         if report is None:

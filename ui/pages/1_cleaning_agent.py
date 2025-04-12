@@ -49,12 +49,12 @@ if __name__ == "__page__":
             st.title("Data Quality Report")
             
             # Display reports
-            MissingValuesReportUI(report).render()
-            DuplicatesReportUI(report).render()
-            OutliersReportUI(report).render()
+            MissingValuesReportUI(report, df).render()
+            DuplicatesReportUI(report, df).render()
+            OutliersReportUI(report, df).render()
 
             st.header("Cleaned Dataset:")
-            PreviewComponent(report.cleaned_data, title="Cleaned Dataset", original_df=df).render()
+            PreviewComponent(report.cleaned_data, original_df=df, title="Cleaned Dataset").render()
             
             csv = report.cleaned_data.to_csv(index=False)
             st.download_button("Download CSV", csv, file_name="cleaned_dataset.csv")

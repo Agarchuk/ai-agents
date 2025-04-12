@@ -20,7 +20,7 @@ class DuplicateValuesNode:
         data_types = report.data_types
 
         if report.handled_missing_values_data is None:
-            df = state.data
+            df = state.data.copy()
         else:   
             df = report.handled_missing_values_data
 

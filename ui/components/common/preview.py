@@ -6,12 +6,11 @@ import pandas as pd
 from utils.logger import log_info
 
 class PreviewComponent:
-    def __init__(self, df: pd.DataFrame, title: str = "Data Preview", max_rows: int = None, original_df: pd.DataFrame = None):
+    def __init__(self, df: pd.DataFrame, original_df: pd.DataFrame, title: str = "Data Preview", max_rows: int = None):
         self.df = df
         self.title = title
         self.max_rows = max_rows
         self.original_df = original_df
-        
         unique_seed = f"{str(df)}{title}{str(uuid.uuid4())}"
         self.component_id = hashlib.md5(unique_seed.encode()).hexdigest()
 

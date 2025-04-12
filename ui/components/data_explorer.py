@@ -22,7 +22,7 @@ class DataExplorer:
             OverviewComponent(self.df).render()
 
         with tabs[1]:
-            PreviewComponent(self.df).render()
+            PreviewComponent(self.df, original_df=self.df).render()
 
         with tabs[2]:
             NumericalStatisticsComponent(self.df).render()

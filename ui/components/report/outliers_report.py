@@ -1,3 +1,4 @@
+import pandas as pd
 from backend.models.pydantic.core.report import Report
 from backend.models.pydantic.outliers.detected_outliers import DetectedOutliers
 from backend.models.pydantic.outliers.column_outliers import ColumnOutliers
@@ -9,8 +10,9 @@ from utils.logger import log_info
 from ui.components.common.preview import PreviewComponent
 
 class OutliersReportUI:
-    def __init__(self, report: Report):
+    def __init__(self, report: Report, df: pd.DataFrame):
         self.report: Report = report
+        self.df: pd.DataFrame = df
 
     def render(self):
         st.header("Outliers Report")
@@ -60,4 +62,4 @@ class OutliersReportUI:
                     st.write(f"**Strategy explanation:** {column_outliers.strategy.explanation}")
 
         with tabs[1]:
-            PreviewComponent(df, title="Preview of Handled Outliers Data", original_df=self.report.initial_data_preview).render()
+            PreviewComponent(df, original_df=self.df, title="Preview of Handled Outliers Data").render()

@@ -64,7 +64,6 @@ class HandlePlausibilityOfOutliersNode:
 
             if df is not None:
                 report.cleaned_data = df
-                state.data = df
 
         return {'report': report}
     

@@ -20,7 +20,7 @@ class HandlePlausibilityOutliersNode:
         report: Report = state.report
 
         log_info(f"state: {state}")
-        df: pd.DataFrame = state.data
+        df: pd.DataFrame = state.data.copy()
         column_types = report.data_types
         dataset_topic = report.dataset_topic
         detected_outliers: DetectedOutliers =report.detected_outliers
