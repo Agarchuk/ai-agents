@@ -26,6 +26,7 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 
 3. Install dependencies:
 ```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
